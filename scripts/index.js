@@ -1,13 +1,16 @@
-const email = querySelector("input.inputEmail");
+const email = document.querySelector("input.inputEmail");
+const senha = document.querySelector("input.inputPassword");
+const principal = document.querySelector("body");
+const formulario = document.getElementById("forms");
 
+function removaTodoEspaco() {
 
-function RemoveTodoEspaco(){
+document.querySelector('.inputMail').innerHTML = email;
 
-document.querySelector('.default').innerHTML = strDefault;
-
-var str = strDefault.replace(/\s/g, '');
-
-document.querySelector('.new').innerHTML = str;
+let str = email.replace(/\s+/g, '');
+console.log(str);
+document.querySelector('.inputMail').textContent = str; 
+//document.querySelector('.inputMail').innerHTML = str;
 };
 
 function RemoveEspaco(){

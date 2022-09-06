@@ -22,14 +22,14 @@
   </div>
 
   <div class="right">
-    <form>
+    <form id="forms">
       <div class="form-header">
         <p>To-Do App</p>
       </div>
       <h1>Acessar</h1>
       <label>
         Email:
-        <input id="inputEmail" type="email">
+        <input class="inputMail" id="inputEmail" type="email" onkeypress="removaTodoEspaco()">
       </label>
       <label>
         Senha:
