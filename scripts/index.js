@@ -1,7 +1,7 @@
- 
-function RemoveTodoEspaco(){
+const email = querySelector("input.inputEmail");
 
-var email = ;
+
+function RemoveTodoEspaco(){
 
 document.querySelector('.default').innerHTML = strDefault;
 
