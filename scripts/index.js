@@ -12,14 +12,3 @@ console.log(digitado);
 
 function RemoveEspaco(){
 };
-
-formulario.addEventListener("submit", (evento) => {
-    evento.preventDefault();
-    removaTodoEspaco();
-    let text1 = digitado;
-    let text2 = text1.split(" ").join("");
-    console.log(text2);
-    //document.querySelector('.outputString').textContent = text2; 
-
-
-});
