@@ -18,9 +18,9 @@ formulario.addEventListener('focusout', (evento) => {
 //desabilita o botão no início 
 document.getElementById("botao").disabled = true;
  //cria um event listener que escuta mudanças no input 
-document.getElementById("input").addEventListener("input", function(event){ 
+document.getElementById("inputEmail").addEventListener("input", function(event){ 
 //busca conteúdo do input 
-var conteudo = document.getElementById("input").value; 
+var conteudo = document.getElementById("inputEmail").value; 
 //valida conteudo do input 
 if (conteudo !== null && conteudo !== '') { 
 //habilita o botão 
