@@ -15,20 +15,15 @@ formulario.addEventListener('focusout', (evento) => {
   event.target.style.background = '';
 });
 
-//desabilita o botão no início 
-document.getElementById("botao").disabled = true;
- //cria um event listener que escuta mudanças no input 
-document.getElementById("inputEmail").addEventListener("input", function(event){ 
-//busca conteúdo do input 
-var conteudo = document.getElementById("inputEmail").value; 
-//valida conteudo do input 
-if (conteudo !== null && conteudo !== '') { 
-//habilita o botão 
-document.getElementById("botao").disabled = false; 
-} 
-else {
-//desabilita o botão se o conteúdo do input ficar em branco 
-document.getElementById("botao").disabled = true; } });
+botao.disabled = true;
+email.addEventListener("change", stateHandle);
+function stateHandle() {
+  if (document.querySelector(".inputMail").value === "") {
+    botao.disabled = true; 
+  } else {
+    botao.disabled = false;
+  }
+};
 
 formulario.onsubmit = (event) => {
   event.preventDefault();
