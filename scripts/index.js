@@ -16,7 +16,7 @@ formulario.addEventListener('focusout', (evento) => {
 });
 
 botao.disabled = true;
-email.addEventListener("change", stateHandle);
+email.addEventListener("change", stateHandle());
 function stateHandle() {
   if (document.querySelector(".inputMail").value === "") {
     botao.disabled = true; 
