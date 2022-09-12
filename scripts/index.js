@@ -5,36 +5,53 @@ let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Não pode haver campos vazios!");
 let botao = document.querySelector(".sub");
 
-window.onload = () => {
-  botao.disabled = true;
-  function stateHandle() {
-    if (email == "" || senha == "") {
-      botao.disabled = true; 
-    } 
-    else {
-      botao.disabled = false;
-    }
-  };
-  email.addEventListener("change", stateHandle());
-  };
+function desabilita() {
+  if (email || senha == "") {
+    botao.disabled = true;
+  }
+  else {
+    botao.disabled = false;
+  }
+};
 
-// Ao retirar o foco do input o mesmo fica vermelho indicando erro quando vazio
+//email.addEventListener("focusin", stateHandlein());
+
+
+// Ao colocar o foco do input o mesmo fica vermelho indicando erro quando vazio
+
 formulario.addEventListener("focusout", (evento) => {
-  if (email == "" || senha == "") {
-    event.target.style.background = "pink";
+  //evento.preventDefault();
+  if (email.value == "" || senha.value == "") {
+    evento.target.style.background = "red";
+    desabilita();
+  }
+  else {
+    evento.target.style.background = "";
+    botao.disabled = false;
   }
 });
-// ao colocar o foco no input o mesmo se normaliza esperando receber um valor
-formulario.addEventListener("focusin", (evento) => {
-  event.target.style.background = "";
-});
+
+formulario.addEventListener("keypress", (evento) => {
+  //evento.preventDefault();
+    evento.target.style.background = "";
+    botao.disabled = false;
+  }
+);
 
 
-formulario.onsubmit = (event) => {
+formulario.onsubmit = (evento) => {
   event.preventDefault();
-  if (email || senha == null) {
+  if (email.value =="" || senha.value === "") {
     errormessage.appendChild(textoerro);
     event.target.style.color = "red";
+  } 
+  else {
+    event.target.style.color = "";
+    formulario.removeChild(errormessage);
+    setTimeout(() => {
+      email.value = null;
+      senha.value = null;
+    }, 0.5 * 1000);
   }
   // Por ser do tipo email, o campo não permite espaços entre a digitação apenas no começo e fim, por isso usamos o metodo "trim";
   let normalizaEmail = email.value.trim();
