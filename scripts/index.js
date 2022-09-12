@@ -4,21 +4,19 @@ let senha = document.getElementById("inputPassword");
 let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Não pode haver campos vazios!");
 
-
-formulario.addEventListener('focusin', (evento) => {
-  if(email || senha == null){
-  event.target.style.background = 'pink';
-}
+formulario.addEventListener("focusin", (evento) => {
+  if (email || senha == null) {
+    event.target.style.background = "pink";
+  }
 });
 
-formulario.addEventListener('focusout', (evento) => {
-  event.target.style.background = '';
+formulario.addEventListener("focusout", (evento) => {
+  event.target.style.background = "";
 });
-
 
 formulario.onsubmit = (event) => {
   event.preventDefault();
-  if(email || senha == null){
+  if (email || senha == null) {
     errormessage.appendChild(textoerro);
   }
   // Por ser do tipo email, o campo não permite espaços entre a digitação apenas no começo e fim, por isso usamos o metodo "trim";
