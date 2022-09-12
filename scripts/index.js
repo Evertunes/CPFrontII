@@ -8,7 +8,7 @@ let botao = document.querySelector(".sub");
 window.onload = () => {
   botao.disabled = true;
   function stateHandle() {
-    if (email.value === null || senha.value === null) {
+    if (email == "" || senha == "") {
       botao.disabled = true; 
     } 
     else {
@@ -20,7 +20,7 @@ window.onload = () => {
 
 // Ao retirar o foco do input o mesmo fica vermelho indicando erro quando vazio
 formulario.addEventListener("focusout", (evento) => {
-  if (email || senha == null) {
+  if (email == "" || senha == "") {
     event.target.style.background = "pink";
   }
 });
