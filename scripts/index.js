@@ -18,16 +18,16 @@ window.onload = () => {
   email.addEventListener("change", stateHandle());
   };
 
+// Ao retirar o foco do input o mesmo fica vermelho indicando erro quando vazio
 formulario.addEventListener("focusout", (evento) => {
   if (email || senha == null) {
     event.target.style.background = "pink";
   }
 });
-
+// ao colocar o foco no input o mesmo se normaliza esperando receber um valor
 formulario.addEventListener("focusin", (evento) => {
   event.target.style.background = "";
 });
-
 
 
 formulario.onsubmit = (event) => {
