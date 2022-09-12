@@ -8,7 +8,7 @@ let botao = document.getElementById("botao");
 window.onload = () => {
   botao.disabled = true;
   function stateHandle() {
-    if (email === null) {
+    if (email === null || senha === null) {
       botao.disabled = true; 
     } 
     else {
