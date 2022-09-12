@@ -23,6 +23,8 @@ formulario.addEventListener("focusout", (evento) => {
   //evento.preventDefault();
   if (email.value == "" || senha.value == "") {
     evento.target.style.background = "red";
+    evento.target.style.color = "red";
+    errormessage.appendChild(textoerro);
     desabilita();
   }
   else {
@@ -40,22 +42,17 @@ formulario.addEventListener("keypress", (evento) => {
 
 
 formulario.onsubmit = (evento) => {
-  event.preventDefault();
-  if (email.value =="" || senha.value === "") {
-    errormessage.appendChild(textoerro);
-    event.target.style.color = "red";
-  } 
-  else {
-    event.target.style.color = "";
+  
     formulario.removeChild(errormessage);
-    setTimeout(() => {
-      email.value = null;
-      senha.value = null;
-    }, 0.5 * 1000);
-  }
-  // Por ser do tipo email, o campo não permite espaços entre a digitação apenas no começo e fim, por isso usamos o metodo "trim";
+    // Por ser do tipo email, o campo não permite espaços entre a digitação apenas no começo e fim, por isso usamos o metodo "trim";
   let normalizaEmail = email.value.trim();
   //O campo senha por sua vez, permite espaços aleatórios entre os caracteres, por esse motivo usamos o "replace";
   let normalizaSenha = senha.value.replace(/ /g, "");
   console.log(`${normalizaEmail}`, `${normalizaSenha}`);
-};
+    setTimeout(() => {
+      email.value = null;
+      senha.value = null;
+    }, 0.5 * 1000);
+  
+  
+}
