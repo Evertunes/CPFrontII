@@ -3,12 +3,12 @@ let email = document.getElementById("inputEmail");
 let senha = document.getElementById("inputPassword");
 let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Não pode haver campos vazios!");
-let botao = document.getElementById("botao");
+let botao = document.querySelector(".sub");
 
 window.onload = () => {
   botao.disabled = true;
   function stateHandle() {
-    if (email === null || senha === null) {
+    if (email.value === null || senha.value === null) {
       botao.disabled = true; 
     } 
     else {
