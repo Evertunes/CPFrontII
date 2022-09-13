@@ -5,6 +5,8 @@ let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Não pode haver campos vazios!");
 let botao = document.querySelector(".sub");
 
+botao.disabled = true;
+
 function desabilita() {
   if (email || senha == "") {
     botao.disabled = true;
@@ -18,15 +20,27 @@ function desabilita() {
 
 
 // Ao colocar o foco do input o mesmo fica vermelho indicando erro quando vazio
-
 formulario.addEventListener("focusout", (evento) => {
   //evento.preventDefault();
   if (email.value == "" || senha.value == "") {
     evento.target.style.background = "red";
-    errormessage.appendChild(textoerro);
     desabilita();
   }
   else {
+  }
+});
+
+email.addEventListener("focusout", () => {
+  if(email.value == ""){
+    errormessage.appendChild(textoerro);
+    errormessage.style.color = "red";
+  }
+});
+
+senha.addEventListener("focusout", () => {
+  if(senha.value == ""){
+    errormessage.appendChild(textoerro);
+    errormessage.style.color = "red";
   }
 });
 
@@ -37,9 +51,7 @@ formulario.addEventListener("keypress", (evento) => {
   }
 );
 
-
 formulario.onsubmit = (evento) => {
-  
     formulario.removeChild(errormessage);
     // Por ser do tipo email, o campo não permite espaços entre a digitação apenas no começo e fim, por isso usamos o metodo "trim";
   let normalizaEmail = email.value.trim();
@@ -50,6 +62,4 @@ formulario.onsubmit = (evento) => {
       email.value = null;
       senha.value = null;
     }, 0.5 * 1000);
-  
-  
-}
+};
