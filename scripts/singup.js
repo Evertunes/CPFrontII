@@ -7,6 +7,8 @@ let textoerro = document.createTextNode("Não pode haver campos vazios!");
 let botao = document.querySelector("botaoRegistro");
 var inputs = document.querySelectorAll("input");
 
+botao.disabled = true;
+
 function checkInputs(inputs) {
   var filled = true;
   inputs.forEach(function (input) {
@@ -18,7 +20,7 @@ function checkInputs(inputs) {
 }
 
 inputs.forEach(function (input) {
-  input.addEventListener("keyup", function () {
+  input.addEventListener("focusin", () => {
     if (checkInputs(inputs)) {
       botao.disabled = false;
     } else {
