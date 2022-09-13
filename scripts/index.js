@@ -23,13 +23,10 @@ formulario.addEventListener("focusout", (evento) => {
   //evento.preventDefault();
   if (email.value == "" || senha.value == "") {
     evento.target.style.background = "red";
-    evento.target.style.color = "red";
     errormessage.appendChild(textoerro);
     desabilita();
   }
   else {
-    evento.target.style.background = "";
-    botao.disabled = false;
   }
 });
 
