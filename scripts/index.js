@@ -16,10 +16,7 @@ function desabilita() {
   }
 };
 
-//email.addEventListener("focusin", stateHandlein());
-
-
-// Ao colocar o foco do input o mesmo fica vermelho indicando erro quando vazio
+// Ao retirar o foco do input o mesmo fica vermelho indicando erro quando vazio
 formulario.addEventListener("focusout", (evento) => {
   //evento.preventDefault();
   if (email.value == "" || senha.value == "") {
@@ -53,7 +50,7 @@ formulario.addEventListener("keypress", (evento) => {
 
 formulario.onsubmit = (evento) => {
     formulario.removeChild(errormessage);
-    // Por ser do tipo email, o campo não permite espaços entre a digitação apenas no começo e fim, por isso usamos o metodo "trim";
+  // Por ser do tipo email, o campo não permite espaços entre a digitação apenas no começo e fim, por isso usamos o metodo "trim";
   let normalizaEmail = email.value.trim();
   //O campo senha por sua vez, permite espaços aleatórios entre os caracteres, por esse motivo usamos o "replace";
   let normalizaSenha = senha.value.replace(/ /g, "");
