@@ -6,6 +6,7 @@ let senhaR = document.getElementById("senhareg");
 let senhaRConfirma = document.getElementById("senharegc");
 let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Não pode haver campos vazios!");
+let textoConfere = document.createTextNode("A confirmação de senha não confere!");
 let inputs = document.querySelectorAll("input");
 let botao = document.querySelector("button");
 botao.disabled = true;
@@ -18,7 +19,7 @@ function checkInputs(inputs) {
     }
   });
   return filled;
-};
+}
 
 inputs.forEach((input) => {
   input.addEventListener("keypress", () => {
@@ -30,102 +31,33 @@ inputs.forEach((input) => {
   });
 });
 
-formularioRegistro.addEventListener("focusout", function() {
-      if (checkInputs(inputs)) {
-        botao.disabled = false;
-      } else {
-        botao.disabled = true;
-        errormessage.appendChild(textoerro);
-        event.target.style.background = "red";
-      }
-    });
+formularioRegistro.addEventListener("focusout", function () {
+  if (checkInputs(inputs)) {
+    botao.disabled = false;
+  } else {
+    botao.disabled = true;
+    errormessage.appendChild(textoerro);
+    event.target.style.background = "red";
+  }
+});
 formularioRegistro.addEventListener("keypress", () => {
-    if(!checkInputs(inputs)){
-        event.target.style.background = "";
-        formularioRegistro.addEventListener("focusout", () => {
-            event.target.style.background = "";
-        })
+  if (!checkInputs(inputs)) {
+    event.target.style.background = "";
+    formularioRegistro.addEventListener("focusout", () => {
+      event.target.style.background = "";
+    });
+  }
+});
+
+senhaRConfirma.addEventListener("focusout", () => {
+    if (senhaR.value != senhaRConfirma.value){
+        errormessage.appendChild(textoConfere);
+        errormessage.style.color = "red";
     }
-}
-)
-//email.addEventListener("focusin", stateHandlein());
-
-// Ao colocar o foco do input o mesmo fica vermelho indicando erro quando vazio
-/*formularioRegistro.addEventListener("focusout", (evento) => {
-  evento.preventDefault();
-  if (
-    nomeR == "" ||
-    sobrenomeR == "" ||
-    emailR ||
-    senhaR == "" ||
-    senhaRConfirma == ""
-  ) {
-    evento.target.style.background = "red";
-    desabilita();
-  }
-});
-
-senhaRConfirma.addEventListener("focusout", () => {
-  formularioRegistro.removeChild(errormessage);
-});
-
-
-nomeR.addEventListener("focusout", () => {
-  if (nomeR.value == "") {
-    errormessage.appendChild(textoerro);
-    errormessage.style.color = "red";
-  }
-  else{
-    evento.target.style.background = "";
-  }
-});
-
-sobrenomeR.addEventListener("focusout", () => {
-  if (sobrenomeR.value == "") {
-    errormessage.appendChild(textoerro);
-    errormessage.style.color = "red";
-  }
-  else{
-    evento.target.style.background = "";
-  }
-});
-
-emailR.addEventListener("focusout", () => {
-  if (emailR.value == "") {
-    errormessage.appendChild(textoerro);
-    errormessage.style.color = "red";
-  }
-  else{
-    evento.target.style.background = "";
-  }
-});
-
-senhaR.addEventListener("focusout", () => {
-  if (senhaR.value == "") {
-    errormessage.appendChild(textoerro);
-    errormessage.style.color = "red";
-  }
-  else{
-    evento.target.style.background = "";
-  }
-});
-
-senhaRConfirma.addEventListener("focusout", () => {
-  if (senhaRConfirma.value == "") {
-    errormessage.appendChild(textoerro);
-    errormessage.style.color = "red";
-  }
-  else{
-    formularioRegistro.removeChild(errormessage);
-        evento.target.style.background = "";
-  }
-});
-
-formularioRegistro.addEventListener("keypress", (evento) => {
-  evento.target.style.background = "";
-  botao.disabled = false;
-});
-*/
+    else {
+        errormessage.removeChild(textoConfere);
+    }
+})
 
 formularioRegistro.onsubmit = (evento) => {
   evento.preventDefault();
