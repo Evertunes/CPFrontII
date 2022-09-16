@@ -17,33 +17,66 @@ function desabilita() {
 };
 
 // Ao retirar o foco do input o mesmo fica vermelho indicando erro quando vazio
-formulario.addEventListener("focusout", (evento) => {
-  //evento.preventDefault();
-  if (email.value == "" || senha.value == "") {
-    evento.target.style.background = "red";
-    desabilita();
-  }
-  else {
-  }
-});
+// formulario.addEventListener("focusout", (evento) => {
+//   //evento.preventDefault();
+//   if (email.value == "" || senha.value == "") {
+//     evento.target.style.background = "pink";
+//     desabilita();
+//   }
+//   else {
+//   }
+// });
+function validateEmail(email) {
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
 
-email.addEventListener("focusout", () => {
+email.addEventListener("keypress", (evento) => {
   if(email.value == ""){
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
   }
+  else{
+    evento.target.style.background = "";
+  }
 });
 
-senha.addEventListener("focusout", () => {
+senha.addEventListener("keypress", (evento) => {
   if(senha.value == ""){
+    errormessage.appendChild(textoerro);
+    errormessage.style.color = "red";
+  }
+  else{
+    evento.target.style.background = "";
+  }
+});
+
+email.addEventListener("focusout", (evento) => {
+  if(email.value !== "" && validateEmail(email.value)){
+    errormessage.removeChild(textoerro);
+  }
+  else{
+    evento.target.style.background = "pink";
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
   }
 });
 
+senha.addEventListener("focusout", (evento) => {
+  if(senha.value !== ""){
+    errormessage.removeChild(textoerro);
+  }
+  else{
+    evento.target.style.background = "pink";
+    errormessage.appendChild(textoerro);
+    errormessage.style.color = "red";
+  }
+});
+
+
 formulario.addEventListener("keypress", (evento) => {
   //evento.preventDefault();
-    evento.target.style.background = "";
+    //evento.target.style.background = "";
     botao.disabled = false;
   }
 );
