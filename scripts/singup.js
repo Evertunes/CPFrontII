@@ -37,7 +37,8 @@ formularioRegistro.addEventListener("focusout", function () {
   } else {
     botao.disabled = true;
     errormessage.appendChild(textoerro);
-    event.target.style.background = "red";
+    errormessage.style.color = "red";
+    event.target.style.background = "pink";
   }
 });
 formularioRegistro.addEventListener("keypress", () => {
