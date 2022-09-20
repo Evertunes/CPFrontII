@@ -102,7 +102,7 @@ const login = fetch(`${urlTodo}/users/login`, {
   },
   body: JSON.stringify({ email: "everton@gmail.com", password: "enha" }),
 })
-  .then((response) => response.json())
+  .then((response) => {response.json()})
   .then((dados) => {
     console.log(dados);
   })
