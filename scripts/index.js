@@ -32,30 +32,27 @@ function validateEmail(email) {
 }
 
 email.addEventListener("keypress", (evento) => {
-  if(email.value == ""){
+  if (email.value == "") {
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
-  }
-  else{
+  } else {
     evento.target.style.background = "";
   }
 });
 
 senha.addEventListener("keypress", (evento) => {
-  if(senha.value == ""){
+  if (senha.value == "") {
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
-  }
-  else{
+  } else {
     evento.target.style.background = "";
   }
 });
 
 email.addEventListener("focusout", (evento) => {
-  if(email.value !== "" && validateEmail(email.value)){
+  if (email.value !== "" && validateEmail(email.value)) {
     errormessage.removeChild(textoerro);
-  }
-  else{
+  } else {
     evento.target.style.background = "pink";
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
@@ -63,23 +60,20 @@ email.addEventListener("focusout", (evento) => {
 });
 
 senha.addEventListener("focusout", (evento) => {
-  if(senha.value !== ""){
+  if (senha.value !== "") {
     errormessage.removeChild(textoerro);
-  }
-  else{
+  } else {
     evento.target.style.background = "pink";
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
   }
 });
 
-
 formulario.addEventListener("keypress", (evento) => {
   //evento.preventDefault();
-    //evento.target.style.background = "";
-    botao.disabled = false;
-  }
-);
+  //evento.target.style.background = "";
+  botao.disabled = false;
+});
 
 formulario.onsubmit = () => {
   formulario.removeChild(errormessage);
@@ -99,16 +93,20 @@ const login = fetch(`${urlTodo}/users/login`, {
   method: "POST",
   headers: {
     "Content-type": "application/json; charset=UTF-8",
+    Authorization:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdmVzZXZlcnRvbjAyQGdtYWlsLmNvbSIsImlkIjo3MDg5LCJpYXQiOjE2NjM2NjQwMTF9.gXrOzptLQchU4bH4xadlN1DS-YOwaJJj6h9xTBOav-E",
   },
-  body: JSON.stringify({ email: "everton@gmail.com", password: "enha" }),
+  body: JSON.stringify({
+    email: "alveseverton02@gmail.com",
+    password: "12345689",
+  }),
 })
-  .then((response) => {response.json()})
+  .then((response) => {
+    response.json();
+  })
   .then((dados) => {
     console.log(dados);
   })
   .catch((erro) => {
     console.log(erro);
   });
-
-
-  

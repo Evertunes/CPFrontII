@@ -6,9 +6,12 @@ let senhaR = document.getElementById("senhareg");
 let senhaRConfirma = document.getElementById("senharegc");
 let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Não pode haver campos vazios!");
-let textoConfere = document.createTextNode("A confirmação de senha não confere!");
+let textoConfere = document.createTextNode(
+  "A confirmação de senha não confere!"
+);
 let inputs = document.querySelectorAll("input");
 let botao = document.querySelector("button");
+let urlTodo = "https://ctd-todo-api.herokuapp.com/v1";
 botao.disabled = true;
 
 function checkInputs(inputs) {
@@ -51,14 +54,13 @@ formularioRegistro.addEventListener("keypress", () => {
 });
 
 senhaRConfirma.addEventListener("focusout", () => {
-    if (senhaR.value != senhaRConfirma.value){
-        errormessage.appendChild(textoConfere);
-        errormessage.style.color = "red";
-    }
-    else {
-        errormessage.removeChild(textoConfere);
-    }
-})
+  if (senhaR.value != senhaRConfirma.value) {
+    errormessage.appendChild(textoConfere);
+    errormessage.style.color = "red";
+  } else {
+    errormessage.removeChild(textoConfere);
+  }
+});
 
 formularioRegistro.onsubmit = (evento) => {
   evento.preventDefault();
@@ -83,3 +85,29 @@ formularioRegistro.onsubmit = (evento) => {
     sobrenomeR.value = null;
   }, 2.0 * 1000);
 };
+
+//registrar usuário
+const registro = fetch(
+  `${urlTodo}/users`,
+  {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+    body: JSON.stringify({
+      firstName: "Everton",
+      lastName: "Alves",
+      email: "alveseverton02@gmail.com",
+      password: "12345689",
+    }),
+  }
+    .then((response) => {
+      response.json();
+    })
+    .then((dados) => {
+      console.log(dados);
+    })
+    .catch((erro) => {
+      console.log(erro);
+    })
+);
