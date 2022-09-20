@@ -5,7 +5,7 @@ let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Não pode haver campos vazios!");
 let botao = document.querySelector(".sub");
 let urlTodo = "https://ctd-todo-api.herokuapp.com/v1";
-
+const header = {'Content-type': "application/json; charset=UTF-8"};
 botao.disabled = true;
 
 function desabilita() {
@@ -91,22 +91,24 @@ formulario.onsubmit = () => {
 // login do usuário
 const login = fetch(`${urlTodo}/users/login`, {
   method: "POST",
-  headers: {
-    "Content-type": "application/json; charset=UTF-8",
-    Authorization:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsdmVzZXZlcnRvbjAyQGdtYWlsLmNvbSIsImlkIjo3MDg5LCJpYXQiOjE2NjM2NjQwMTF9.gXrOzptLQchU4bH4xadlN1DS-YOwaJJj6h9xTBOav-E",
-  },
+  headers: header,
   body: JSON.stringify({
     email: "alveseverton02@gmail.com",
     password: "12345689",
   }),
 })
-  .then((response) => {
-    response.json();
-  })
-  .then((dados) => {
-    console.log(dados);
-  })
-  .catch((erro) => {
-    console.log(erro);
-  });
+  .then( async response => {
+    if (response.status === 201) {
+      let body = await response.json()
+      let token = body.jwt;
+
+      sessionStorage.setItem("token", token)
+
+      const headerGetMe = {
+          'Content-type': 'application/json; charset=UTF-8',
+          'Authorization': token
+      }
+  }})
+
+  
+  

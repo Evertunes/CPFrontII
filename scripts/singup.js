@@ -12,6 +12,7 @@ let textoConfere = document.createTextNode(
 let inputs = document.querySelectorAll("input");
 let botao = document.querySelector("button");
 let urlTodo = "https://ctd-todo-api.herokuapp.com/v1";
+
 botao.disabled = true;
 
 function checkInputs(inputs) {
@@ -88,26 +89,16 @@ formularioRegistro.onsubmit = (evento) => {
 
 //registrar usuário
 const registro = fetch(
-  `${urlTodo}/users`,
+  `${urlTodo}/users/getME`,
   {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-    body: JSON.stringify({
-      firstName: "Everton",
-      lastName: "Alves",
-      email: "alveseverton02@gmail.com",
-      password: "12345689",
-    }),
-  }
-    .then((response) => {
-      response.json();
+    method: "GET",
+    headers: headerGetMe,
     })
-    .then((dados) => {
-      console.log(dados);
+    .then(async response => {
+      if (response.status === 200) {
+          let body = await response.json()
+          
+          let nomeCompleto = `${body.firstName} ${body.lastName}`
+          sessionStorage.setItem("nomeCompleto", nomeCompleto)
+      }
     })
-    .catch((erro) => {
-      console.log(erro);
-    })
-);
