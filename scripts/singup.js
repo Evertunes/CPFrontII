@@ -6,13 +6,10 @@ let senhaR = document.getElementById("senhareg");
 let senhaRConfirma = document.getElementById("senharegc");
 let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Não pode haver campos vazios!");
-let textoConfere = document.createTextNode(
-  "A confirmação de senha não confere!"
-);
+let textoConfere = document.createTextNode("A confirmação de senha não confere!");
 let inputs = document.querySelectorAll("input");
 let botao = document.querySelector("button");
 let urlTodo = "https://ctd-todo-api.herokuapp.com/v1";
-
 botao.disabled = true;
 
 function checkInputs(inputs) {
