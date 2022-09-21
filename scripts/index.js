@@ -5,7 +5,7 @@ let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Não pode haver campos vazios!");
 let botao = document.querySelector(".sub");
 let urlTodo = "https://ctd-todo-api.herokuapp.com/v1";
-const header = {'Content-type': "application/json; charset=UTF-8"};
+const header = { "Content-type": "application/json; charset=UTF-8" };
 botao.disabled = true;
 
 function desabilita() {
@@ -31,35 +31,37 @@ function validateEmail(email) {
   return re.test(email);
 }
 
-email.addEventListener("keypress", (evento) => {
+email.onkeypress = (evento) => {
   if (email.value == "") {
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
   } else {
     evento.target.style.background = "";
   }
-});
+};
 
-senha.addEventListener("keypress", (evento) => {
+senha.onkeypress = (evento) => {
   if (senha.value == "") {
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
   } else {
     evento.target.style.background = "";
   }
-});
+};
 
-email.addEventListener("focusout", (evento) => {
+email.onblur = (evento) => {
   if (email.value !== "" && validateEmail(email.value)) {
-    errormessage.removeChild(textoerro);
+    if (errormessage == true) {
+      errormessage.removeChild(textoerro);
+    }
   } else {
     evento.target.style.background = "pink";
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
   }
-});
+};
 
-senha.addEventListener("focusout", (evento) => {
+senha.onblur = (evento) => {
   if (senha.value !== "") {
     errormessage.removeChild(textoerro);
   } else {
@@ -67,13 +69,13 @@ senha.addEventListener("focusout", (evento) => {
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
   }
-});
+};
 
-formulario.addEventListener("keypress", (evento) => {
+formulario.onkeypress = (evento) => {
   //evento.preventDefault();
   //evento.target.style.background = "";
   botao.disabled = false;
-});
+};
 
 formulario.onsubmit = () => {
   formulario.removeChild(errormessage);
@@ -89,24 +91,25 @@ formulario.onsubmit = () => {
 };
 
 // login do usuário
-const login = fetch(`${urlTodo}/users/login`, {
-  method: "POST",
-  headers: header,
-  body: JSON.stringify({
-    email: "alveseverton02@gmail.com",
-    password: "12345689",
-  }),
-})
-  .then( async response => {
+botao.onsubmit = () => {
+  fetch(`${urlTodo}/users/login`, {
+    method: "POST",
+    headers: header,
+    body: JSON.stringify({
+      email: "alveseverton02@gmail.com",
+      password: "12345689",
+    }),
+  }).then(async (response) => {
     if (response.status === 201) {
-      let body = await response.json()
+      let body = await response.json();
       let token = body.jwt;
 
-      sessionStorage.setItem("token", token)
+      sessionStorage.setItem("token", token);
 
       const headerGetMe = {
-          'Content-type': 'application/json; charset=UTF-8',
-          'Authorization': token
-      }
-      
-  }})
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: token,
+      };
+    }
+  });
+};
