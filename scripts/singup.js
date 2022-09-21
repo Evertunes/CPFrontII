@@ -25,7 +25,7 @@ function checkInputs(inputs) {
 }
 
 inputs.forEach((input) => {
-  input.onkeypress = () => {
+  inputs.onkeypress = () => {
     if (checkInputs(inputs)) {
       botao.disabled = false;
     } else {
@@ -42,7 +42,7 @@ inputs.forEach((input) => {
       event.target.style.background = "pink";
     }
   };
-  formularioRegistro.onkeypress = () => {
+  inputs.onkeypress = () => {
     if (!checkInputs(inputs)) {
       event.target.style.background = "";
       formularioRegistro.onblur = () => {
