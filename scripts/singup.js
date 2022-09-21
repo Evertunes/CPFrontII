@@ -56,7 +56,9 @@ senhaRConfirma.addEventListener("focusout", () => {
     errormessage.appendChild(textoConfere);
     errormessage.style.color = "red";
   } else {
+    if(checkInputs(inputs) == false){
     errormessage.removeChild(textoConfere);
+  }
   }
 });
 
@@ -85,17 +87,17 @@ formularioRegistro.onsubmit = (evento) => {
 };
 
 //registrar usuário
-const registro = fetch(
-  `${urlTodo}/users/getME`,
-  {
-    method: "GET",
-    headers: headerGetMe,
-    })
-    .then(async response => {
-      if (response.status === 200) {
-          let body = await response.json()
+// const registro = fetch(
+//   `${urlTodo}/users/getME`,
+//   {
+//     method: "GET",
+//     headers: headerGetMe,
+//     })
+//     .then(async response => {
+//       if (response.status === 200) {
+//           let body = await response.json()
           
-          let nomeCompleto = `${body.firstName} ${body.lastName}`
-          sessionStorage.setItem("nomeCompleto", nomeCompleto)
-      }
-    })
+//           let nomeCompleto = `${body.firstName} ${body.lastName}`
+//           sessionStorage.setItem("nomeCompleto", nomeCompleto)
+//       }
+//     })
