@@ -41,8 +41,11 @@ senharC.onblur = () => {
 };
 
 senharC.onkeyup = () => {
- if(nomeR.value, sobrenomeR.value, emailR.value, senhaR.value, senharC.value !==""){
+ if(nomeR.value && sobrenomeR.value && emailR.value && senhaR.value && senharC.value !==""){
   botaoR.disabled = false;
+ }
+ else{
+  botaoR.disabled = true;
  }
 }
 
@@ -60,4 +63,5 @@ formReg.onsubmit = () => {
     nomeR.value = null;
     sobrenomeR.value = null;
   }, 0.5 * 1000);
+  botaoR.disabled = true;
 };
