@@ -74,14 +74,8 @@ formulario.onsubmit = () => {
   let normalizaEmail = email.value.trim();
   let normalizaSenha = senha.value.replace(/ /g, "");
   console.log(`${normalizaEmail}`, `${normalizaSenha}`);
-  setTimeout(() => {
-    email.value = null;
-    senha.value = null;
-  }, 0.5 * 1000);
-};
 
-// login do usuário
- formulario.onsubmit = () => {
+  // login do usuário
   const bodyLogin = JSON.stringify({
     email: emailR.value,
     password: senhaR.value
@@ -101,4 +95,11 @@ formulario.onsubmit = () => {
 
     }
 })
- };
+
+  setTimeout(() => {
+    email.value = null;
+    senha.value = null;
+  }, 0.5 * 1000);
+};
+
+
