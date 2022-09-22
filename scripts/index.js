@@ -15,16 +15,6 @@ function desabilita() {
   }
 }
 
-// Ao retirar o foco do input o mesmo fica vermelho indicando erro quando vazio
-// formulario.addEventListener("focusout", (evento) => {
-//   //evento.preventDefault();
-//   if (email.value == "" || senha.value == "") {
-//     evento.target.style.background = "pink";
-//     desabilita();
-//   }
-//   else {
-//   }
-// });
 function validateEmail(email) {
   var re = /\S+@\S+\.\S+/;
   return re.test(email);
@@ -70,17 +60,9 @@ senha.onblur = (evento) => {
   }
 };
 
-formulario.onkeypress = (evento) => {
-  //evento.preventDefault();
-  //evento.target.style.background = "";
-  botao.disabled = false;
-};
-
 formulario.onsubmit = () => {
   formulario.removeChild(errormessage);
-  // Por ser do tipo email, o campo não permite espaços entre a digitação apenas no começo e fim, por isso usamos o metodo "trim";
   let normalizaEmail = email.value.trim();
-  //O campo senha por sua vez, permite espaços aleatórios entre os caracteres, por esse motivo usamos o "replace";
   let normalizaSenha = senha.value.replace(/ /g, "");
   console.log(`${normalizaEmail}`, `${normalizaSenha}`);
   setTimeout(() => {
