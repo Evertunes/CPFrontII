@@ -91,4 +91,4 @@ const bodyLogin = JSON.stringify({
     sobrenomeR.value = null;
   }, 0.5 * 1000);
   botaoR.disabled = true;
-};
+})}
