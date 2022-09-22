@@ -6,8 +6,7 @@ let textoerro = document.createTextNode("Não pode haver campos vazios!");
 let botao = document.querySelector(".sub");
 let urlTodo = "https://ctd-todo-api.herokuapp.com/v1";
 const header = { "Content-type": "application/json; charset=UTF-8" };
-botao.disabled = true;
-
+botao.disabled = true
 function desabilita() {
   if (email || senha == "") {
     botao.disabled = true;
@@ -91,25 +90,25 @@ formulario.onsubmit = () => {
 };
 
 // login do usuário
-botao.onsubmit = () => {
-  fetch(`${urlTodo}/users/login`, {
-    method: "POST",
-    headers: header,
-    body: JSON.stringify({
-      email: "alveseverton02@gmail.com",
-      password: "12345689",
-    }),
-  }).then(async (response) => {
-    if (response.status === 201) {
-      let body = await response.json();
-      let token = body.jwt;
+// botao.onsubmit = () => {
+//   fetch(`${urlTodo}/users/login`, {
+//     method: "POST",
+//     headers: header,
+//     body: JSON.stringify({
+//       email: "alveseverton02@gmail.com",
+//       password: "12345689",
+//     }),
+//   }).then(async (response) => {
+//     if (response.status === 201) {
+//       let body = await response.json();
+//       let token = body.jwt;
 
-      sessionStorage.setItem("token", token);
+//       sessionStorage.setItem("token", token);
 
-      const headerGetMe = {
-        "Content-type": "application/json; charset=UTF-8",
-        Authorization: token,
-      };
-    }
-  });
-};
+//       const headerGetMe = {
+//         "Content-type": "application/json; charset=UTF-8",
+//         Authorization: token,
+//       };
+//     }
+//   });
+// };

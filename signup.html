@@ -20,34 +20,34 @@
     <img src="./assets/pessoa-signup.png" alt="">
   </div>
   <div class="right">
-    <form id="registro">
+    <form name="registro">
       <div class="form-header">
         <p>To-Do App</p>
       </div>
 
       <label>
         Nome:
-        <input class="nomeRegistro" id="nomereg" type="text">
+        <input id="nomereg" type="text">
       </label>
       <label>
         Sobrenome:
-        <input class="sobrenomeRegistro" id="sobrenomereg" type="text">
+        <input id="sobrenomereg" type="text">
       </label>
       <label>
         Email:
-        <input class="emailRegistro" id="emailreg" type="email">
+        <input id="emailreg" type="email">
       </label>
       <label>
         Senha:
-        <input class="senhaRegistro" id="senhareg" type="password">
+        <input id="senhareg" type="password">
       </label>
       <label>
         Repetir senha:
-        <input class="senhaRegistroC" id="senharegc" type="password">
+        <input id="senharegc" type="password">
       </label>
 
-      <button type="submit" class="botaoRegistro" id="botaoreg" disabled="disabled">Criar conta</button>
-      <div class="error" id="erro"></div>
+      <button type="submit" name="criar">Criar conta</button>
+      <div id="erro"></div>
     </form>
     <div class="ingressar">
       <a href="index.html">Já possui conta? Acesse aqui</a>
@@ -56,5 +56,4 @@
 
 </body>
 <script src="./scripts/singup.js"></script>
-<script src="./scripts/utils.js"></script>
 </html>

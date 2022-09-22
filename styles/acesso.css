@@ -64,6 +64,10 @@ button {
   font-size: 1em;
 }
 
+button:disabled{
+  background-color: gray;
+}
+
 .form-header {
   color: grey;
   font-size: 2em;

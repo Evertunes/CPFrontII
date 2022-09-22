@@ -1,107 +1,74 @@
-let formularioRegistro = document.getElementById("registro");
-let nomeR = document.getElementById("nomereg");
-let sobrenomeR = document.getElementById("sobrenomereg");
-let emailR = document.getElementById("emailreg");
-let senhaR = document.getElementById("senhareg");
-let senhaRConfirma = document.getElementById("senharegc");
-let errormessage = document.getElementById("erro");
-let textoerro = document.createTextNode("Não pode haver campos vazios!");
-let textoConfere = document.createTextNode(
-  "A confirmação de senha não confere!"
-);
-let inputs = document.querySelectorAll("input");
-let botao = document.querySelector("button");
-let urlTodo = "https://ctd-todo-api.herokuapp.com/v1";
-botao.disabled = true;
+let formReg = document.forms["registro"];
+let botaoR = formReg["criar"];
+let nomeR = formReg["nomereg"];
+let sobrenomeR = formReg["sobrenomereg"];
+let emailR = formReg["emailreg"];
+let senhaR = formReg["senhareg"];
+let senharC = formReg["senharegc"];
+let textoERR = document.getElementById("erro");
+let conteudoERR = document.createTextNode("Confirmação de senha não confere!");
+let conteudoERR2 = document.createTextNode("Não pode haver campos vazios!");
 
-function checkInputs(inputs) {
-  var filled = true;
-  inputs.forEach((input) => {
-    if (input.value === "") {
-      filled = false;
-    }
-  });
-  return filled;
-}
+botaoR.disabled = true;
 
-inputs.forEach((input) => {
-  inputs.onkeypress = () => {
-    if (checkInputs(inputs)) {
-      botao.disabled = false;
-    } else {
-      botao.disabled = true;
-    }
-  };
-  formularioRegistro.onblur = () => {
-    if (checkInputs(inputs)) {
-      botao.disabled = false;
-    } else {
-      botao.disabled = true;
-      errormessage.appendChild(textoerro);
-      errormessage.style.color = "red";
-      event.target.style.background = "pink";
-    }
-  };
-  inputs.onkeypress = () => {
-    if (!checkInputs(inputs)) {
-      event.target.style.background = "";
-      formularioRegistro.onblur = () => {
-        event.target.style.background = "";
-      };
-    }
-  };
+nomeR.onblur = () => {
+  if(nomeR.value === ""){
+    nomeR.style.background = "pink";
+  }
+};
 
-  senhaRConfirma.onblur = () => {
-    if (senhaR.value != senhaRConfirma.value) {
-      if (errormessage == true) {
-        errormessage.appendChild(textoConfere);
-        errormessage.style.color = "red";
-      }
-    } else {
-      if (checkInputs(inputs) == false) {
-        if (errormessage == true) {
-          errormessage.removeChild(textoConfere);
-        }
-      }
-    }
-  };
+sobrenomeR.onblur = () => {
+  if(sobrenomeR.value === ""){
+    sobrenomeR.style.background = "pink";
+  }
+};
 
-  formularioRegistro.onsubmit = (evento) => {
-    evento.preventDefault();
-    errormessage.removeChild(textoerro);
-    let normalizaNome = nomeR.value.trim();
-    let normalizaSobrenome = sobrenomeR.value.trim();
-    let normalizaEmail = emailR.value.trim();
-    let normalizaSenha = senhaR.value.replace(/ /g, "");
-    let normalizaSenhaRc = senhaRConfirma.value.replace(/ /g, "");
-    console.log(
-      `${normalizaNome}`,
-      `${normalizaSobrenome}`,
-      `${normalizaEmail}`,
-      `${normalizaSenha}`,
-      `${normalizaSenhaRc}`
-    );
-    setTimeout(() => {
-      emailR.value = null;
-      senhaR.value = null;
-      senhaRConfirma.value = null;
-      nomeR.value = null;
-      sobrenomeR.value = null;
-    }, 2.0 * 1000);
-  };
+emailR.onblur = () => {
+  if(emailR.value === ""){
+    emailR.style.background = "pink";
+  }
+};
 
-  //registrar usuário
-  formularioRegistro.onsubmit = (evento) => {
-    evento.preventDefault();
-    fetch(`${urlTodo}/users/getME`, {
-      method: "GET",
-      headers: headerGetMe,
-    }).then(async (response) => {
-      if (response.status === 200) {
-        let body = await response.json();
+senhaR.onblur = () => {
+  if(senhaR.value === ""){
+    senhaR.style.background = "pink";
+  }
+};
 
-        let nomeCompleto = `${body.firstName} ${body.lastName}`;
-        sessionStorage.setItem("nomeCompleto", nomeCompleto);
-      }
-    });
-}})
+senharC.onblur = () => {
+  if(senharC.value === ""){
+    senharC.style.background = "pink";
+  }
+};
+
+senharC.onblur = () =>{
+  if(senhaR.value === senharC.value){
+    botaoR.disabled = false;
+  }
+  else{
+    textoERR.appendChild(conteudoERR);
+    textoERR.style.color = "red";
+  }
+};
+
+senharC.onblur = () =>{
+  if(nomeR.value, sobrenomeR.value, emailR.value, senhaR.value, senharC.value !== ""){
+    botaoR.disabled = false;
+  }
+};
+
+
+formReg.onsubmit = () => {
+  event.preventDefault();
+  let normalizaEmailR = emailR.value.trim();
+  let normalizaSenhaR = senhaR.value.replace(/ /g, "");
+  let normalizaSenhaRC = senharC.value.replace(/ /g, "");
+  console.log(`${normalizaEmailR}`, `${normalizaSenhaR}`, `${normalizaSenhaRC}`);
+  setTimeout(() => {
+    emailR.value = null;
+    senharC.value = null;
+    senhaR.value = null;
+    nomeR.value = null;
+    sobrenomeR.value = null;
+  }, 0.5 * 1000);
+};
