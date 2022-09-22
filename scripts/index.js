@@ -21,7 +21,7 @@ function validateEmail(email) {
   return re.test(email);
 }
 
-email.onkeypress = (evento) => {
+email.onkeyup = (evento) => {
   if (email.value == "") {
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
@@ -30,7 +30,7 @@ email.onkeypress = (evento) => {
   }
 };
 
-senha.onkeypress = (evento) => {
+senha.onkeyup = (evento) => {
   if (senha.value == "") {
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
@@ -58,7 +58,7 @@ senha.onkeyup = () => {
 }
 
 senha.onblur = (evento) => {
-  if (senha.value !== "") {
+  if (senha.value !== "" && errormessage == true) {
     errormessage.removeChild(textoerro);
   } 
   else {
