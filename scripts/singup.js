@@ -29,33 +29,22 @@ emailR.onblur = () => {
   }
 };
 
-senhaR.onblur = () => {
+senharC.onblur = () => {
   if(senhaR.value === ""){
     senhaR.style.background = "pink";
   }
-};
-
-senharC.onblur = () => {
-  if(senharC.value === ""){
-    senharC.style.background = "pink";
-  }
-};
-
-senharC.onblur = () =>{
-  if(senhaR.value === senharC.value){
-    botaoR.disabled = false;
+  else if (senhaR.value === senharC){
   }
   else{
-    textoERR.appendChild(conteudoERR);
-    textoERR.style.color = "red";
-  }
+
+  };
 };
 
-senharC.onblur = () =>{
-  if(nomeR.value, sobrenomeR.value, emailR.value, senhaR.value, senharC.value !== ""){
-    botaoR.disabled = false;
-  }
-};
+senharC.onkeyup = () => {
+ if(nomeR.value, sobrenomeR.value, emailR.value, senhaR.value, senharC.value !==""){
+  botaoR.disabled = false;
+ }
+}
 
 
 formReg.onsubmit = () => {

@@ -3,6 +3,7 @@ let email = document.getElementById("inputEmail");
 let senha = document.getElementById("inputPassword");
 let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Não pode haver campos vazios!");
+let errofetch = document.createTextNode("Erro de login!");
 let botao = document.querySelector(".sub");
 let urlTodo = "https://ctd-todo-api.herokuapp.com/v1";
 const header = { "Content-type": "application/json; charset=UTF-8" };
@@ -50,10 +51,18 @@ email.onblur = (evento) => {
   }
 };
 
+senha.onkeyup = () => {
+  if (senha.value !== "") {
+    errormessage.removeChild(textoerro);
+    botao.disabled = false;
+  } 
+}
+
 senha.onblur = (evento) => {
   if (senha.value !== "") {
     errormessage.removeChild(textoerro);
-  } else {
+  } 
+  else {
     evento.target.style.background = "pink";
     errormessage.appendChild(textoerro);
     errormessage.style.color = "red";
@@ -72,25 +81,24 @@ formulario.onsubmit = () => {
 };
 
 // login do usuário
-// botao.onsubmit = () => {
-//   fetch(`${urlTodo}/users/login`, {
-//     method: "POST",
-//     headers: header,
-//     body: JSON.stringify({
-//       email: "alveseverton02@gmail.com",
-//       password: "12345689",
-//     }),
-//   }).then(async (response) => {
-//     if (response.status === 201) {
-//       let body = await response.json();
-//       let token = body.jwt;
+ formulario.onsubmit = () => {
+  const bodyLogin = JSON.stringify({
+    email: emailR.value,
+    password: senhaR.value
+  })
+.then(async response => {
 
-//       sessionStorage.setItem("token", token);
+    if(response.status === 201){
+      let body = await response.json();
+      let token = body.jwt;
 
-//       const headerGetMe = {
-//         "Content-type": "application/json; charset=UTF-8",
-//         Authorization: token,
-//       };
-//     }
-//   });
-// };
+      sessionStorage.setItem("token", token)
+    }
+
+    if(response.status === 400){
+    textoerro.appendChild(errofetch);
+    textoerro.style.color = "red";
+
+    }
+})
+ };
