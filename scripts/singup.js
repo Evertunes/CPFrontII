@@ -79,11 +79,9 @@ const bodyLogin = JSON.stringify({
   }
 
   if(response.status === 400){
-  textoerro.appendChild(errofetch);
-  textoerro.style.color = "red";
-
+    textoerro.appendChild(errofetch);
+    textoerro.style.color = "red";
   }
-})
 
   setTimeout(() => {
     emailR.value = null;

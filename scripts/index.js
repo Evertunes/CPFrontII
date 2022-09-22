@@ -90,16 +90,21 @@ formulario.onsubmit = () => {
     }
 
     if(response.status === 400){
-    textoerro.appendChild(errofetch);
-    textoerro.style.color = "red";
-
+      function myFunction() {
+        var x = document.getElementById("erro");
+          x.innerHTML = "Login Failed, try again!";
+          textoERR.style.color = "red";
+        }
+      myFunction();
+      }
+  
+  
+    })
     }
-})
 
   setTimeout(() => {
     email.value = null;
     senha.value = null;
   }, 0.5 * 1000);
-};
 
 
