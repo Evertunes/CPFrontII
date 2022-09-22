@@ -52,8 +52,7 @@ email.onblur = (evento) => {
 };
 
 senha.onkeyup = () => {
-  if (senha.value !== "") {
-    errormessage.removeChild(textoerro);
+  if (senha.value !== "" ) {
     botao.disabled = false;
   } 
 }
