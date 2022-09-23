@@ -8,47 +8,96 @@ let senharC = formReg["senharegc"];
 let textoERR = document.getElementById("erro");
 let conteudoERR = document.createTextNode("Confirmação de senha não confere!");
 let conteudoERR2 = document.createTextNode("Não pode haver campos vazios!");
-
+let emailRok = false;
+let senhaRok = false;
 botaoR.disabled = true;
 
-nomeR.onblur = () => {
-  if (nomeR.value === "") {
-    nomeR.style.background = "pink";
-  }
-};
+function validateEmailR(emailR) {
+  var reR = /\S+@\S+\.\S+/;
+  return reR.test(emailR);
+}
 
-sobrenomeR.onblur = () => {
-  if (sobrenomeR.value === "") {
-    sobrenomeR.style.background = "pink";
-  }
-};
-
-emailR.onblur = () => {
-  if (emailR.value === "") {
-    emailR.style.background = "pink";
-  }
-};
-
-senharC.onblur = () => {
-  if (senhaR.value === "") {
-    senhaR.style.background = "pink";
-  } else if (senhaR.value === senharC) {
-  } else {
-  }
-};
-
-senharC.onkeyup = () => {
-  if (
-    nomeR.value &&
-    sobrenomeR.value &&
-    emailR.value &&
-    senhaR.value &&
-    senharC.value !== ""
-  ) {
+function validaBotaoR() {
+  if (emailRok && senhaRok) {
     botaoR.disabled = false;
   } else {
     botaoR.disabled = true;
   }
+}
+
+nomeR.onkeyup = (evento) => {
+  if (nomeR.value !== "") {
+    textoERR.innerText = "";
+    evento.target.style.background = "";
+    emailRok = true;
+  } else {
+    evento.target.style.background = "pink";
+    textoERR.appendChild(conteudoERR2);
+    textoERR.style.color = "red";
+    emailRok = false;
+  }
+  validaBotaoR();
+};
+
+sobrenomeR.onkeyup = (evento) => {
+  if (sobrenomeR.value !== "") {
+    textoERR.innerText = "";
+    evento.target.style.background = "";
+    emailRok = true;
+  } else {
+    evento.target.style.background = "pink";
+    textoERR.appendChild(conteudoERR2);
+    textoERR.style.color = "red";
+    emailRok = false;
+  }
+  validaBotaoR();
+};
+
+emailR.onkeyup = (evento) => {
+  emailR.value = emailR.value.replace(/ /g, "");
+  if (validateEmailR(emailR.value)) {
+    textoERR.innerText = "";
+    evento.target.style.background = "";
+    emailRok = true;
+  } else {
+    evento.target.style.background = "pink";
+    textoERR.appendChild(conteudoERR2);
+    textoERR.style.color = "red";
+    emailRok = false;
+  }
+  validaBotaoR();
+};
+
+senhaR.onkeyup = (evento) => {
+  senhaR.value = senhaR.value.replace(/ /g, "");
+  if (senhaR.value !== "") {
+    textoERR.innerText = "";
+    evento.target.style.background = "";
+    senhaRok = true;
+  } else {
+    evento.target.style.background = "pink";
+    textoERR.appendChild(conteudoERR2);
+    textoERR.style.color = "red";
+    senhaRok = false;
+  }
+  validaBotaoR();
+};
+
+senharC.onkeyup = (evento) => {
+  senharC.value = senharC.value.replace(/ /g, "");
+    if (nomeR.value && sobrenomeR.value && emailR.value && senhaR.value && senharC.value !== "" && senhaR === senharC) {
+      textoERR.innerText = "";
+      evento.target.style.background = "";
+      senhaRok = true;
+    } 
+    else {
+      evento.target.style.background = "pink";
+      textoERR.appendChild(conteudoERR2);
+      textoERR.style.color = "red";
+      senhaRok = false;
+    }
+    validaBotaoR();
+
 };
 
 formReg.onsubmit = () => {

@@ -5,7 +5,7 @@ let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Existe(m) campo(s) inválido(s)!");
 let errofetch = document.createTextNode("Erro de login!");
 let botao = document.querySelector(".sub");
-let urlTodo = "https://ctd-todo-api.herokuapp.com/v1";
+let urlTodo = "https://ctd-fe2-todo-v2.herokuapp.com/v1/";
 const header = { "Content-type": "application/json; charset=UTF-8" };
 let emailOk = false;
 let senhaOk = false;
