@@ -10,6 +10,8 @@ let conteudoERR = document.createTextNode("Confirmação de senha não confere!"
 let conteudoERR2 = document.createTextNode("Não pode haver campos vazios!");
 let emailRok = false;
 let senhaRok = false;
+const urlTodo = "https://ctd-fe2-todo-v2.herokuapp.com/v1";
+
 botaoR.disabled = true;
 
 function validateEmailR(emailR) {
@@ -110,7 +112,7 @@ senharC.onkeyup = (evento) => {
    
 };
 
-formReg.onsubmit = () => {
+formReg.onsubmit = (event) => {
   event.preventDefault();
   let normalizaEmailR = emailR.value.trim();
   let normalizaSenhaR = senhaR.value.replace(/ /g, "");
@@ -120,34 +122,80 @@ formReg.onsubmit = () => {
     `${normalizaSenhaR}`,
     `${normalizaSenhaRC}`
   );
-
+  }
 // registro do usuário
-const bodyLogin = JSON.stringify({
-  firstName: nomeR.value,
-  lastName: sobrenomeR,
-  email: emailR.value,
-  password: senhaR.value
-})
-.then(async response => {
 
-  if(response.status === 201){
-    let body = await response.json();
-    let token = body.jwt;
+const test = 0;
+// login do usuário
 
-    sessionStorage.setItem("token", token)
-  }
+function registrar(event) {
+  event.preventDefault();
+  let nomeR = document.getElementById("nomereg").value;
+  let sobrenomeR = document.getElementById("sobrenomereg").value;
+  let emailR = document.getElementById("emailreg").value;
+  let passwordR = document.getElementById("senhareg").value;
 
-  if(response.status === 400){
-    textoerro.appendChild(errofetch);
-    textoerro.style.color = "red";
-  }
+  const dados = {
+    nomeR,
+    sobrenomeR,
+    emailR,
+    passwordR,
+  };
 
-  setTimeout(() => {
-    emailR.value = null;
-    senharC.value = null;
-    senhaR.value = null;
-    nomeR.value = null;
-    sobrenomeR.value = null;
-  }, 0.5 * 1000);
-  botaoR.disabled = true;
-})}
+  const teste = 0;
+
+  fetch(`${urlTodo}/users`, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dados),
+  })
+    .then(function (response) {
+      if ((response.status = 400)) {
+       return alert("Usuário já se encontra registrado!");
+      } else if (response.status = 404) {
+       return alert("Alguns dados solicitados estão incorretos!");
+      }
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      localStorage.setItem("token", data.jwt);
+      window.location.href = "tarefas.html";
+    })
+    .catch(function (err) {
+      const teste = err;
+      console.log(teste);
+    });
+}
+
+// const bodyLogin = JSON.stringify({
+//   firstName: nomeR.value,
+//   lastName: sobrenomeR,
+//   email: emailR.value,
+//   password: senhaR.value
+// })
+// .then(async response => {
+
+//   if(response.status === 201){
+//     let body = await response.json();
+//     let token = body.jwt;
+
+//     sessionStorage.setItem("token", token)
+//   }
+
+//   if(response.status === 400){
+//     textoerro.appendChild(errofetch);
+//     textoerro.style.color = "red";
+//   }
+
+//   setTimeout(() => {
+//     emailR.value = null;
+//     senharC.value = null;
+//     senhaR.value = null;
+//     nomeR.value = null;
+//     sobrenomeR.value = null;
+//   }, 0.5 * 1000);
+//   botaoR.disabled = true;
+// })
