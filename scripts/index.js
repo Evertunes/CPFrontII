@@ -5,8 +5,8 @@ let errormessage = document.getElementById("erro");
 let textoerro = document.createTextNode("Existe(m) campo(s) inválido(s)!");
 let errofetch = document.createTextNode("Erro de login!");
 let botao = document.querySelector(".sub");
-let urlTodo = "https://ctd-todo-api.herokuapp.com/v1";
-const header = { "Content-type": "application/json; charset=UTF-8" };
+const urlTodo = "https://ctd-fe2-todo-v2.herokuapp.com/v1";
+let tipoHeader = { "Content-type": "application/json; charset=UTF-8" };
 let emailOk = false;
 let senhaOk = false;
 botao.disabled = true;
@@ -54,11 +54,73 @@ senha.onkeyup = (evento) => {
   validaBotao();
 };
 
-formulario.onsubmit = () => {
-  formulario.removeChild(errormessage);
+const test = 0;
+// login do usuário
 
-  // login do usuário
-  const bodyLogin = JSON.stringify({
+function login(event) {
+  event.preventDefault();
+
+  let email = document.getElementById("inputEmail").value;
+  let password = document.getElementById("inputPassword").value;
+
+  const dados = {
+    email,
+    password,
+  };
+
+  const teste = 0;
+
+  fetch(`${urlTodo}/users/login`, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dados),
+  })
+    .then(function (response) {
+      if ((response.status = 400)) {
+       return alert("Senha Incorreta!");
+      } else if (response.status = 404) {
+       return alert("Usuário não encontrado!");
+      }
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      localStorage.setItem("token", data.jwt);
+      window.location.href = "tarefas.html";
+    })
+    .catch(function (err) {
+      const teste = err;
+      console.log(teste);
+    });
+}
+/* function login(event) {
+  console.log(`teste: ${botao.disabled}`);
+  event.preventDefault();
+
+  fetch(`${urlTodo}/users/login`, {
+    method: "post",
+    headers: tipoHeader,
+    body: JSON.stringify({ email: "email.value", password: "senha.value" }),
+  })
+    .then(function (resposta) {
+      return resposta.json;
+    })
+
+    .then(function (data) {
+      const test = data;
+      console.log(`data ${test}`);
+      sessionStorage.setItem("token", data.jwt);
+      window.location.href = "tarefas.html";
+    })
+    .catch((erro) => {
+      console.log(`erro${erro}`);
+    });
+} */
+
+/* 
+const bodyLogin = JSON.stringify({
     email: email.value,
     password: senhaR.value,
   }).then(async (response) => {
@@ -78,9 +140,4 @@ formulario.onsubmit = () => {
       myFunction();
     }
   });
-};
-
-setTimeout(() => {
-  email.value = null;
-  senha.value = null;
-}, 0.5 * 1000);
+}; */
