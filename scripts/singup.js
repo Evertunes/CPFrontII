@@ -85,19 +85,29 @@ senhaR.onkeyup = (evento) => {
 
 senharC.onkeyup = (evento) => {
   senharC.value = senharC.value.replace(/ /g, "");
-    if (nomeR.value && sobrenomeR.value && emailR.value && senhaR.value && senharC.value !== "" && senhaR === senharC) {
-      textoERR.innerText = "";
-      evento.target.style.background = "";
-      senhaRok = true;
-    } 
-    else {
-      evento.target.style.background = "pink";
-      textoERR.appendChild(conteudoERR2);
-      textoERR.style.color = "red";
-      senhaRok = false;
-    }
-    validaBotaoR();
+  if (senharC.value !== "") {
+    textoERR.innerText = "";
+    evento.target.style.background = "";
+    senhaRok = true;
+  } 
+  
+  else if(senhaR.value !== senharC.value){
 
+    evento.target.style.background = "pink";
+    textoERR.appendChild(conteudoERR);
+    textoERR.style.color = "red";
+    senhaRok = false;
+
+  }
+
+  else {
+    evento.target.style.background = "pink";
+    textoERR.appendChild(conteudoERR2);
+    textoERR.style.color = "red";
+    senhaRok = false;
+  }
+  validaBotaoR();
+   
 };
 
 formReg.onsubmit = () => {
