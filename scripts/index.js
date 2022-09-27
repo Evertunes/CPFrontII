@@ -13,7 +13,6 @@ botao.disabled = true;
 
 window.onload = () => {
   if (sessionStorage.getItem("token") !== null) {
-    console.log(sessionStorage.getItem("token"));
     window.location.href = "tarefas.html";
   }
 };

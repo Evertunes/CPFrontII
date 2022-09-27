@@ -1,6 +1,7 @@
 let formularioTarefa = document.forms["formtarefa"];
 let adicionar = formularioTarefa["add"];
 let caracteres = document.getElementById("novaTarefa");
+let listaTarefas = document.getElementById("lista-tarefas")
 adicionar.disabled = true;
 
 window.onload = () => {
@@ -65,3 +66,15 @@ function infoTarefas() {
       console.log(erro);
     });
 }
+
+
+
+
+/* 
+ <div id="skeleton"> 
+<li class="tarefa">
+<div class="not-done"></div>
+<div class="descricao">
+  <p class="nome">Nova tarefa</p>
+  <p class="timestamp">Criada em: 15/07/21</p>
+</div> */
