@@ -150,48 +150,15 @@ formReg.addEventListener ("submit", function (event) {
   else{
     textoERR.innerText = "";
   }
-  botaoR.disabled = true;
-})})
+  
+  setTimeout(() => {
+    nomeR.value = null;
+    sobrenomeR.value = null;
+    emailR.value = null;
+    senhaR.value = null;
+    senharC.value = null  
+    botaoR.disabled = true;
+  }, 0.5 * 1000)
+})},
 
-  // formReg.onsubmit = (event) => {
-//   event.preventDefault();
-//   let normalizaEmailR = emailR.value.trim();
-//   let normalizaSenhaR = senhaR.value.replace(/ /g, "");
-//   let normalizaSenhaRC = senharC.value.replace(/ /g, "");
-//   console.log(
-//     `${normalizaEmailR}`,
-//     `${normalizaSenhaR}`,
-//     `${normalizaSenhaRC}`
-//   );
-//  }
-// registro do usuário
-// const dados = {
-  //   nomeR,
-  //   sobrenomeR,
-  //   emailR,
-  //   passwordR,
-//   fetch(`${urlTodoR}/users`, {
-//     method: "post",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(dados),
-//   })
-//     .then(function (response) {
-//       if ((response.status ===  400)) {
-//        return alert("Usuário já se encontra registrado!");
-//       } else if (response.status === 404) {
-//        return alert("Alguns dados solicitados estão incorretos!");
-//       }
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data);
-//       localStorage.setItem("token", data.jwt);
-//       window.location.href = "tarefas.html";
-//     })
-//     .catch(function (err) {
-//       const teste = err;
-//       console.log(teste);
-//     });
-// }
+)

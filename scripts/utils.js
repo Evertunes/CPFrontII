@@ -1,3 +1,8 @@
+let formularioTarefa = document.forms["formtarefa"];
+let adicionar = formularioTarefa["add"];
+let caracteres = formularioTarefa["novaTarefa"].minLength = "5";
+//adicionar.disabled = true;
+
 window.onload = () => {
   infoUsuario();
   infoTarefas();
