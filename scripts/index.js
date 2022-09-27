@@ -11,6 +11,13 @@ let emailOk = false;
 let senhaOk = false;
 botao.disabled = true;
 
+window.onload = () => {
+  if (sessionStorage.getItem("token") !== null) {
+    console.log(sessionStorage.getItem("token"));
+    window.location.href = "tarefas.html";
+  }
+};
+
 function validateEmail(email) {
   var re = /\S+@\S+\.\S+/;
   return re.test(email);
@@ -54,7 +61,6 @@ senha.onkeyup = (evento) => {
   validaBotao();
 };
 
-
 // login do usuário
 
 function login(event) {
@@ -76,19 +82,18 @@ function login(event) {
     body: JSON.stringify(dados),
   })
     .then(function (response) {
-      if ((response.status === 400)) {
-       return alert("Senha Incorreta!");
+      if (response.status === 400) {
+        return alert("Senha Incorreta!");
       } else if (response.status === 404) {
-       return alert("Usuário não encontrado!");
+        return alert("Usuário não encontrado!");
       }
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
-      localStorage.setItem("token", data.jwt);
+      sessionStorage.setItem("token", data.jwt);
       window.location.href = "tarefas.html";
     })
-    .catch(function (err) {
-      console.log(teste);
+    .catch(function (erro) {
+      console.log(erro);
     });
 }

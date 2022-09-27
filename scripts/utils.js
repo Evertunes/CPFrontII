@@ -32,25 +32,22 @@ function infoUsuario() {
 }
 
 function infoTarefas() {
-    const urlTodo = "https://ctd-fe2-todo-v2.herokuapp.com/v1";
-    fetch(`${urlTodo}/tasks`, {
-      method: "get",
-      headers: {
-        Authorization: `${sessionStorage.getItem("token")}`,
-      },
+  const urlTodo = "https://ctd-fe2-todo-v2.herokuapp.com/v1";
+  fetch(`${urlTodo}/tasks`, {
+    method: "get",
+    headers: {
+      Authorization: `${sessionStorage.getItem("token")}`,
+    },
+  })
+    .then(function (response) {
+      return response.json();
     })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        sessionStorage.setItem("dadosTarefas", JSON.stringify(data));
-        const tarefas = JSON.parse(sessionStorage.getItem("dadosTarefas"));
-        console.log(tarefas)
-
-
-        
-      })
-      .catch(function (erro) {
-        console.log(erro);
-      });
-  }
+    .then(function (data) {
+      sessionStorage.setItem("dadosTarefas", JSON.stringify(data));
+      const tarefas = JSON.parse(sessionStorage.getItem("dadosTarefas"));
+      console.log(tarefas);
+    })
+    .catch(function (erro) {
+      console.log(erro);
+    });
+}
