@@ -78,16 +78,11 @@ function login(event) {
     body: JSON.stringify(dados),
   })
     .then(function (response) {
-      if ((response.status = 400)) {
-       return alert("Senha Incorreta!");
-      } else if (response.status = 404) {
-       return alert("Usuário não encontrado!");
-      }
       return response.json();
     })
     .then(function (data) {
       console.log(data);
-      localStorage.setItem("token", data.jwt);
+      sessionStorage.setItem("token", data.jwt);
       window.location.href = "tarefas.html";
     })
     .catch(function (err) {
@@ -95,6 +90,13 @@ function login(event) {
       console.log(teste);
     });
 }
+
+
+
+
+
+
+
 /* function login(event) {
   console.log(`teste: ${botao.disabled}`);
   event.preventDefault();
