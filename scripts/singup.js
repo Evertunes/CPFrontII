@@ -150,13 +150,6 @@ formReg.addEventListener ("submit", function (event) {
   else{
     textoERR.innerText = "";
   }
-  setTimeout(() => {
-    emailR = null;
-    senharC = null;
-    senhaR = null;
-    nomeR = null;
-    sobrenomeR = null;
-  }, 0.5 * 1000);
   botaoR.disabled = true;
 })})
 
