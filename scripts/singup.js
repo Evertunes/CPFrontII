@@ -151,14 +151,7 @@ formReg.addEventListener ("submit", function (event) {
     textoERR.innerText = "";
   }
   
-  setTimeout(() => {
-    nomeR.value = null;
-    sobrenomeR.value = null;
-    emailR.value = null;
-    senhaR.value = null;
-    senharC.value = null  
-    botaoR.disabled = true;
-  }, 0.5 * 1000)
+  document.getElementById("myForm").reset()
 })},
 
 )
