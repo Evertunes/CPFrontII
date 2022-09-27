@@ -76,19 +76,19 @@ function login(event) {
     body: JSON.stringify(dados),
   })
     .then(function (response) {
+      if ((response.status === 400)) {
+       return alert("Senha Incorreta!");
+      } else if (response.status === 404) {
+       return alert("Usuário não encontrado!");
+      }
       return response.json();
     })
     .then(function (data) {
       console.log(data);
-      sessionStorage.setItem("token", data.jwt);
+      localStorage.setItem("token", data.jwt);
       window.location.href = "tarefas.html";
     })
     .catch(function (err) {
       console.log(teste);
     });
 }
-
-
-
-
-
