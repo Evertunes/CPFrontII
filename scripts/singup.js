@@ -10,7 +10,7 @@ let conteudoERR = document.createTextNode("Confirmação de senha não confere!"
 let conteudoERR2 = document.createTextNode("Não pode haver campos vazios!");
 let emailRok = false;
 let senhaRok = false;
-const urlTodo = "https://ctd-fe2-todo-v2.herokuapp.com/v1";
+const urlTodoR = "https://ctd-fe2-todo-v2.herokuapp.com/v1";
 
 botaoR.disabled = true;
 
@@ -144,7 +144,7 @@ function registrar(event) {
 
   const teste = 0;
 
-  fetch(`${urlTodo}/users`, {
+  fetch(`${urlTodoR}/users`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
