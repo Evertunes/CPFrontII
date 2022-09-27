@@ -1,7 +1,6 @@
 let formularioTarefa = document.forms["formtarefa"];
 let adicionar = formularioTarefa["add"];
 let caracteres = document.getElementById("novaTarefa");
-let x = document.getElementById("novaTarefa").minLength = "5";
 adicionar.disabled = true;
 
 window.onload = () => {
@@ -9,11 +8,14 @@ window.onload = () => {
   infoTarefas();
 };
 
-function validar(){
-  if (caracteres.length == x) {
-    adicionar.disabled = false;
-  }
-};
+function validar(x,y){
+      if (y.length == x.minLength) {
+        var next = x.tabIndex;
+        if (next < document.getElementById("myForm").length) {
+          adicionar.disabled = false;
+        }
+      }
+    };
 
 function finalizarSessao() {
   sessionStorage.clear("token");

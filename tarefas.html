@@ -40,10 +40,10 @@
   </header>
 
 
-  <form class="nova-tarefa" name="formtarefa">
+  <form class="nova-tarefa" name="formtarefa" id="myForm">
     <div class="not-done "></div>
-    <input id="novaTarefa" type="text" placeholder="Nova tarefa" onkeydown="validar()">
-    <button type="submit" id="add">
+    <input id="novaTarefa" type="text" placeholder="Nova tarefa" tabindex="1" minlength="5" onkeydown="validar(this,this.value)">
+    <button type="submit" id="add" tabindex="2">
       <img src="./assets/plus.png" alt="Adicionar uma nova tarefa">
     </button>
   </form>
