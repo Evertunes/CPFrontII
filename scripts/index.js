@@ -54,7 +54,7 @@ senha.onkeyup = (evento) => {
   validaBotao();
 };
 
-const test = 0;
+
 // login do usuário
 
 function login(event) {
@@ -67,8 +67,6 @@ function login(event) {
     email,
     password,
   };
-
-  const teste = 0;
 
   fetch(`${urlTodo}/users/login`, {
     method: "post",
@@ -86,7 +84,6 @@ function login(event) {
       window.location.href = "tarefas.html";
     })
     .catch(function (err) {
-      const teste = err;
       console.log(teste);
     });
 }
