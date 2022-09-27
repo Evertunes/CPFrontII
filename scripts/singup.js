@@ -8,9 +8,10 @@ let senharC = formReg["senharegc"];
 let textoERR = document.getElementById("erro");
 let conteudoERR = document.createTextNode("Confirmação de senha não confere!");
 let conteudoERR2 = document.createTextNode("Não pode haver campos vazios!");
+let errofetch2 = document.createTextNode("Erro de Cadastro!");
 let emailRok = false;
 let senhaRok = false;
-const urlTodoR = "https://ctd-fe2-todo-v2.herokuapp.com/v1";
+const urlTodoR = "https://ctd-fe2-todo-v2.herokuapp.com/v1/";
 
 botaoR.disabled = true;
 
@@ -93,109 +94,111 @@ senharC.onkeyup = (evento) => {
     senhaRok = true;
   } 
   
-  else if(senhaR.value !== senharC.value){
+  else if(senhaR.value === senharC.value){
 
-    evento.target.style.background = "pink";
-    textoERR.appendChild(conteudoERR);
-    textoERR.style.color = "red";
-    senhaRok = false;
+    textoERR.innerText = "";
+    evento.target.style.background = "";
+    senhaRok = true;
 
   }
 
   else {
     evento.target.style.background = "pink";
-    textoERR.appendChild(conteudoERR2);
+    textoERR.appendChild(conteudoERR);
     textoERR.style.color = "red";
     senhaRok = false;
   }
   validaBotaoR();
    
 };
-
-formReg.onsubmit = (event) => {
-  event.preventDefault();
-  let normalizaEmailR = emailR.value.trim();
-  let normalizaSenhaR = senhaR.value.replace(/ /g, "");
-  let normalizaSenhaRC = senharC.value.replace(/ /g, "");
-  console.log(
-    `${normalizaEmailR}`,
-    `${normalizaSenhaR}`,
-    `${normalizaSenhaRC}`
-  );
-  }
-// registro do usuário
-
-const test = 0;
-// login do usuário
-
-function registrar(event) {
+formReg.addEventListener ("submit", function (event) {
   event.preventDefault();
   let nomeR = document.getElementById("nomereg").value;
   let sobrenomeR = document.getElementById("sobrenomereg").value;
   let emailR = document.getElementById("emailreg").value;
-  let passwordR = document.getElementById("senhareg").value;
+  let senhaR = document.getElementById("senhareg").value;
+  
+  const bodyLogin = JSON.stringify({
+  firstName: nomeR,
+  lastName: sobrenomeR,
+  email: emailR,
+  password: senhaR})
+  console.log("body", bodyLogin)
+  fetch(`${urlTodoR}users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: bodyLogin,
+})
+.then(async response => {
+  console.log("response", response);
+  // https://ctd-fe2-todo-v2.herokuapp.com/v1/users
+  // https://ctd-fe2-todo-v2.herokuapp.com/v1/users
+  if(response.status === 201){
+    let body = await response.json();
+    let token = body.jwt;
 
-  const dados = {
-    nomeR,
-    sobrenomeR,
-    emailR,
-    passwordR,
-  };
+    sessionStorage.setItem("token", token)
+  }
 
-  const teste = 0;
+  if(response.status === 400){
+    textoERR.appendChild(errofetch2);
+    textoERR.style.color = "red";
+  }
 
-  fetch(`${urlTodoR}/users`, {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(dados),
-  })
-    .then(function (response) {
-      if ((response.status = 400)) {
-       return alert("Usuário já se encontra registrado!");
-      } else if (response.status = 404) {
-       return alert("Alguns dados solicitados estão incorretos!");
-      }
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      localStorage.setItem("token", data.jwt);
-      window.location.href = "tarefas.html";
-    })
-    .catch(function (err) {
-      const teste = err;
-      console.log(teste);
-    });
-}
+  else{
+    textoERR.innerText = "";
+  }
+  setTimeout(() => {
+    emailR = null;
+    senharC = null;
+    senhaR = null;
+    nomeR = null;
+    sobrenomeR = null;
+  }, 0.5 * 1000);
+  botaoR.disabled = true;
+})})
 
-// const bodyLogin = JSON.stringify({
-//   firstName: nomeR.value,
-//   lastName: sobrenomeR,
-//   email: emailR.value,
-//   password: senhaR.value
-// })
-// .then(async response => {
-
-//   if(response.status === 201){
-//     let body = await response.json();
-//     let token = body.jwt;
-
-//     sessionStorage.setItem("token", token)
-//   }
-
-//   if(response.status === 400){
-//     textoerro.appendChild(errofetch);
-//     textoerro.style.color = "red";
-//   }
-
-//   setTimeout(() => {
-//     emailR.value = null;
-//     senharC.value = null;
-//     senhaR.value = null;
-//     nomeR.value = null;
-//     sobrenomeR.value = null;
-//   }, 0.5 * 1000);
-//   botaoR.disabled = true;
-// })
+  // formReg.onsubmit = (event) => {
+//   event.preventDefault();
+//   let normalizaEmailR = emailR.value.trim();
+//   let normalizaSenhaR = senhaR.value.replace(/ /g, "");
+//   let normalizaSenhaRC = senharC.value.replace(/ /g, "");
+//   console.log(
+//     `${normalizaEmailR}`,
+//     `${normalizaSenhaR}`,
+//     `${normalizaSenhaRC}`
+//   );
+//  }
+// registro do usuário
+// const dados = {
+  //   nomeR,
+  //   sobrenomeR,
+  //   emailR,
+  //   passwordR,
+//   fetch(`${urlTodoR}/users`, {
+//     method: "post",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(dados),
+//   })
+//     .then(function (response) {
+//       if ((response.status ===  400)) {
+//        return alert("Usuário já se encontra registrado!");
+//       } else if (response.status === 404) {
+//        return alert("Alguns dados solicitados estão incorretos!");
+//       }
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//       localStorage.setItem("token", data.jwt);
+//       window.location.href = "tarefas.html";
+//     })
+//     .catch(function (err) {
+//       const teste = err;
+//       console.log(teste);
+//     });
+// }
