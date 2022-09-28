@@ -10,6 +10,8 @@ window.onload = () => {
 
 function finalizarSessao() {
   sessionStorage.clear("token");
+  sessionStorage.clear("dadosUsuario");
+  sessionStorage.clear("dadosTarefas");
   window.location.href = "index.html";
 }
 
