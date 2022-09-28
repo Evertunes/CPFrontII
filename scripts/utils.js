@@ -52,7 +52,6 @@ function infoTarefas() {
     .then(function (data) {
       sessionStorage.setItem("dadosTarefas", JSON.stringify(data));
       const tarefas = JSON.parse(sessionStorage.getItem("dadosTarefas"));
-      console.log(tarefas);
       const listaTarefasPendentes = data.map((tarefa) =>
         criaListaTarefasPendentes(tarefa)
       );

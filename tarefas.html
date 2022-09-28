@@ -42,7 +42,8 @@
 
   <form class="nova-tarefa" name="formtarefa" id="myForm">
     <div class="not-done "></div>
-    <input id="nova-Tarefa" type="text" placeholder="Nova tarefa" autocomplete="off" tabindex="1" minlength="5" onkeyup="validar(this,this.value)">
+    <input id="nova-Tarefa" type="text" placeholder="Nova tarefa" autocomplete="off" tabindex="1" minlength="5"
+      onkeyup="validar(this,this.value)">
     <button type="submit" id="add" tabindex="2" onclick="criarTarefa(event)">
       <img src="./assets/plus.png" alt="Adicionar uma nova tarefa">
     </button>
@@ -51,8 +52,8 @@
 
   <ul class="tarefas-pendentes">
     <div id="lista-tarefas">
-     <!--  <div id="skeleton"> -->
-
+      <div id="skeleton">
+      </div>
     </div>
   </ul>
 
@@ -64,4 +65,5 @@
 
 </body>
 <script src="./scripts/utils.js"></script>
+
 </html>
