@@ -71,26 +71,31 @@ function infoTarefas() {
 function criaListaTarefasPendentes(tarefa) {
   if (tarefa.completed === false) {
     return `
-<div id="lista"> 
-<li class="tarefa">
-<div class="not-done"></div>
-<div class=${tarefa.description}>
-  <p class="nome">${tarefa.description}</p>
-  <p class="timestamp">${tarefa.createdAt}</p>
-</div>`;
+    <li class="tarefa">
+    <div class="not-done" id="${tarefa.id}"></div>
+    <div class="descricao">
+        <p class="nome">${tarefa.description}</p>
+        <p class="timestamp"><i class="far fa-calendar-alt"></i> ${tarefa.createdAt}</p>
+    </div>
+</li>
+`;
   }
 }
 
 function criaListaTarefasConcluidas(tarefa) {
   if (tarefa.completed === true) {
     return `
-<div id="lista"> 
-<li class="tarefa">
-<div class="not-done"></div>
-<div class=${tarefa.description}>
-  <p class="nome">${tarefa.description}</p>
-  <p class="timestamp">${tarefa.createdAt}</p>
-</div>`;
+    <li class="tarefa">
+    <div class="done"></div>
+    <div class="descricao">
+    <p class="nome">${tarefa.description}</p>
+    <div>
+        <button><i id="${tarefa.id}" class="fas fa-undo-alt change"></i></button>
+        <button><i id="${tarefa.id}" class="far fa-trash-alt"></i></button>
+    </div>
+    </div>
+</li>
+`;
   }
 }
 
