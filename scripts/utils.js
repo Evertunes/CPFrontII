@@ -102,9 +102,8 @@ function validar(x, y) {
   }
 }
 
-
 function criarTarefa(event) {
-  event.preventDefault()
+  event.preventDefault();
   let nomeTarefa = document.getElementById("nova-Tarefa").value;
   caracteres.value = caracteres.value.trim();
   const urlTodo = "https://ctd-fe2-todo-v2.herokuapp.com/v1";
@@ -115,8 +114,8 @@ function criarTarefa(event) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      description : nomeTarefa,
-      completed: false
+      description: nomeTarefa,
+      completed: false,
     }),
   })
     .then(function (response) {
@@ -129,4 +128,4 @@ function criarTarefa(event) {
     .catch(function (erro) {
       console.log(erro);
     });
-};
+}
